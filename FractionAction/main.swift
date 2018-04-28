@@ -95,7 +95,6 @@ if remainder == 0 {
 }
 
 
-
 // OUTPUT
 // Report results to the user here
 
