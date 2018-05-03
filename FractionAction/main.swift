@@ -8,7 +8,7 @@
 
 import Foundation
 
-// INPUT
+//======================================================INPUT===========================================================\\
 // Collect and filter user input here
 
 // Make sure numerator is acceptable
@@ -63,7 +63,7 @@ while 2 == 2 {
     break
 }
 
-// PROCESS
+//=====================================================PROCESS========================================================\\
 // Implement the primary logic of the problem here
 
 // Find Quotient and Remainder
@@ -71,11 +71,31 @@ let quotient = numerator / denominator
 let remainder = numerator % denominator
 
 // Find GCF
-var GCF = 0
-// Loop backwards from halfway point of numerator
-for i in stride(from: remainder / 2, through: 2, by: -1) {
-    GCF = i
+
+var secondNumerator = 0
+var secondDenominator = 0
+var gcf = 0
+
+// Start at half of denominator and go backwards
+for i in stride(from: denominator/2, through: 2, by: -1) {
+        
+    if (numerator % denominator) % i == 0 && denominator % i == 0 {
+            
+        // If common factor is found, reduce the fraction
+        secondNumerator = (numerator % denominator) / i
+        secondDenominator = denominator / i
+    } else {
+        continue
+    }
 }
+
+while numerator % 2 == 0 && denominator % 2 == 0 {
+    numerator = numerator/2
+    denominator = denominator/2
+    continue
+}
+print("The result is")
+print("\(numerator)/\(denominator)")
 
 // Check result
 // Whole number?
@@ -83,18 +103,35 @@ if remainder == 0 {
     print("The result is:")
     print(quotient)
 
-// Negative Fraction?
-} else if numerator < denominator {
-    print("The result is:")
-    print("")
-
+// Answer less than 1?
+//} else if quotient == 0 {
+//        var secondNumerator = 0
+//        var secondDenominator = 0
+//
+//        // starting from the helf way point of the denominator and going down check for common factors.
+//        for i in stride(from: denominator/2, through: 2, by: -1) {
+//
+//            // if a common farctor is found, reduce the fraction and end the program
+//            if numerator % i == 0 && denominator % i == 0 {
+//                secondNumerator = numerator / i
+//                secondDenominator = denominator / i
+//                print("The result is: \n\(secondNumerator)/\(secondDenominator)")
+//            }
+//
+//        }
+    
 // Normal Fraction
 } else {
     print("The result is:")
-    print("\(quotient) \(remainder / GCF)/\(denominator / GCF)")
+    print("\(quotient) \(remainder / gcf)/\(denominator / gcf)")
 }
+
 
 
 // OUTPUT
 // Report results to the user here
 
+while numerator % 2 == 0 && denominator % 2 == 0 {
+        numerator = numerator/2
+        denominator = denominator/2
+    }
