@@ -70,11 +70,6 @@ while 2 == 2 {
 var quotient = numerator / denominator
 var remainder = numerator % denominator
 
-// Find GCF
-
-var secondNumerator = 0
-var secondDenominator = 0
-var gcf = 0
 
 // Normal Fraction
 if remainder == 0 {
