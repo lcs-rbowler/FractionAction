@@ -67,8 +67,8 @@ while 2 == 2 {
 // Implement the primary logic of the problem here
 
 // Find Quotient and Remainder
-let quotient = numerator / denominator
-let remainder = numerator % denominator
+var quotient = numerator / denominator
+var remainder = numerator % denominator
 
 // Find GCF
 
@@ -76,62 +76,32 @@ var secondNumerator = 0
 var secondDenominator = 0
 var gcf = 0
 
-// Start at half of denominator and go backwards
-for i in stride(from: denominator/2, through: 2, by: -1) {
-        
-    if (numerator % denominator) % i == 0 && denominator % i == 0 {
-            
-        // If common factor is found, reduce the fraction
-        secondNumerator = (numerator % denominator) / i
-        secondDenominator = denominator / i
-    } else {
-        continue
-    }
-}
-
-while numerator % 2 == 0 && denominator % 2 == 0 {
-    numerator = numerator/2
-    denominator = denominator/2
-    continue
-}
-print("The result is")
-print("\(numerator)/\(denominator)")
-
-// Check result
-// Whole number?
+// Normal Fraction
 if remainder == 0 {
     print("The result is:")
-    print(quotient)
-
-// Answer less than 1?
-//} else if quotient == 0 {
-//        var secondNumerator = 0
-//        var secondDenominator = 0
-//
-//        // starting from the helf way point of the denominator and going down check for common factors.
-//        for i in stride(from: denominator/2, through: 2, by: -1) {
-//
-//            // if a common farctor is found, reduce the fraction and end the program
-//            if numerator % i == 0 && denominator % i == 0 {
-//                secondNumerator = numerator / i
-//                secondDenominator = denominator / i
-//                print("The result is: \n\(secondNumerator)/\(secondDenominator)")
-//            }
-//
-//        }
-    
-// Normal Fraction
+    print("\(quotient)")
 } else {
-    print("The result is:")
-    print("\(quotient) \(remainder / gcf)/\(denominator / gcf)")
+    // Find GCF
+    //Loop backwards from halfway point
+    var GCF = 1
+    for possibleFactor in stride(from: remainder, through: 2, by: -1){
+        
+        if remainder % possibleFactor == 0 && denominator % possibleFactor == 0 {
+            
+            //now we know that "i" is the GCF
+            GCF = possibleFactor
+            break //stop the loop now that we have a match
+        }
+        
+    }
+    
+    // Output reduced fraction
+    if quotient == 0 {
+        print("The result is:")
+        print("\(remainder / GCF)/\(denominator / GCF)")
+    } else {
+        print("The result is:")
+        print("\(quotient) \(remainder / GCF)/\(denominator / GCF)")
+    }
 }
 
-
-
-// OUTPUT
-// Report results to the user here
-
-while numerator % 2 == 0 && denominator % 2 == 0 {
-        numerator = numerator/2
-        denominator = denominator/2
-    }
